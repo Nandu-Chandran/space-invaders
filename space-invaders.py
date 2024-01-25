@@ -2,7 +2,7 @@ import pygame
 
 background_color= (0,0,0)
 screen_x=500
-screem_y=500
+screen_y=500
 screen = pygame.display.set_mode((500,500))
 
 pygame.display.set_caption('space invaders')
@@ -31,7 +31,6 @@ while running:
             running = False
     keys = pygame.key.get_pressed()
 
-
     for bullet in bullets:
         print(('Bullet coordinate',bullet,bullet_y))
 
@@ -40,12 +39,12 @@ while running:
             bullet_y += bullet_vel
         else:
             bullets.pop(bullets.index(bullet))
-
+    #print(len(bullets))
     if keys[pygame.K_SPACE]:
         #print('pressed bullet')
-        if len(bullets) < 5:
-            #print('circle drawn',round(x),round(y))
-            bullets.append(pygame.draw.circle(screen,bullet_col,(round(x),round(y)),bullet_rad))
+        if len(bullets) == 0:
+            #print('circle drawn at',round(x),round(y))
+            bullets.append(pygame.draw.circle(screen, (0, 255, 0),[round(x), round(y)], 170, 0))
 
     if keys[pygame.K_LEFT] and x>0:
         x-= velocity
@@ -56,8 +55,6 @@ while running:
     if keys[pygame.K_DOWN] and y<500 -ship_height:
         y+=velocity
 
-    
-   
     screen.fill(background_color)
     pygame.draw.rect(screen,(255,0,0),(x,y,ship_width,ship_height))
     pygame.display.update()
